@@ -45,12 +45,10 @@ public class Asiakas {
 	public void setSposti(String sposti) {
 		this.sposti = sposti;
 	}
-
-	
 	@Override
 	public String toString() {
-		return "Asiakas [etunimi=" + etunimi + ", sukunimi=" + sukunimi + ", puhelin=" + puhelin + ", sposti=" + sposti
-				+ ", asiakas_id=" + asiakas_id + "]";
+		return "Asiakas [asiakas_id=" + asiakas_id + ", etunimi=" + etunimi + ", puhelin=" + puhelin + ", sposti="
+				+ sposti + ", sukunimi=" + sukunimi + "]";
 	}
 
 	
