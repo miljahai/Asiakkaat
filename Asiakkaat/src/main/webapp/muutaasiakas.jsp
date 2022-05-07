@@ -36,6 +36,7 @@
 			</tr>
 		</tbody>
 		</table>
+		<input type="hidden" name="asiakas_id" id="asiakas_id">
 	</form>
 	<span id="ilmo"></span>
 </body>
@@ -47,20 +48,20 @@ $(document).ready(function(){
 	
 	var asiakas_id = requestURLParam("asiakas_id");
 	$.ajax({url:"asiakkaat/haeyksi/"+asiakas_id, type:"GET", dataType:"json", success:function(result){
-		$("#asiakas_id").val(result.asiakas_id);
 		$("#etunimi").val(result.etunimi);
 		$("#sukunimi").val(result.sukunimi);
 		$("#puhelin").val(result.puhelin);
 		$("#sposti").val(result.sposti);
+		$("#asiakas_id").val(result.asiakas_id);
 	}});
 	
 	$("#tiedot").validate({
 		rules: {
 			etunimi: {
-				required: true,
+				required: true
 			},
 			sukunimi: { 
-				required: true,
+				required: true
 			},
 			puhelin: {
 				required: true,
@@ -69,7 +70,7 @@ $(document).ready(function(){
 			},
 			sposti: {
 				required: true,
-				minlength: 3
+				email: true
 			}
 		},
 		messages: {
@@ -97,13 +98,12 @@ $(document).ready(function(){
 
 function paivitaTiedot(){
 	var formJsonStr = formDataJsonStr($("#tiedot").serializeArray());
-	$.ajax({url:"asiakkaat", data:formJsonStr, type:"PUT", dataType:"json", success:function(result) {
+	$.ajax({url:"asiakkaat", data:formJsonStr, type:"PUT", success:function(result) {
 		if(result.response==0){
 			$("#ilmo").html("Asiakkaan päivittäminen epäonnistui.");
 		}else if(result.response==1){
 			$("#ilmo").html("Asiakkaan päivittäminen onnistui.");
-			$("#asiakas_id", "#etunimi", "#sukunimi", "#puhelin", "#sposti").val("");
-		}
+			}
 	}});
 }
 </script>
